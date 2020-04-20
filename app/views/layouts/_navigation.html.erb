@@ -7,6 +7,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <% if logged_in? %>
       <li class="nav-item">
         <%= link_to "Bloggers", users_path, class: "nav-link" %>
       </li>
@@ -21,7 +22,6 @@
           <a class="dropdown-item" href="#">Something else here</a> -->
         </div>
       </li>
-      <% if logged_in? %>
           <li class="nav-item">
             <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
           </li>
