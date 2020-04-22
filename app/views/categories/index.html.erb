@@ -1,4 +1,9 @@
 <h1 class="text-center mt-4">Listing all categories</h1>
+
+<div class="flickr_pagination">
+  <%= will_paginate @categories, :container => false %>
+</div>
+
 <div class="container">
   <% if @categories.length == 0 %>
     <div class="text-center mb-1"><h5>There is no any category found.</h5></div>
@@ -11,7 +16,7 @@
              Category <%= category.id %>
           </div>
           <div class="card-body">
-            <h5 class="card-title text-success"><%= category.name %></h5>
+            <h5 class="card-title"><%= link_to category.name, category_path(category), class: "text-success" %></h5>
             <p class="card-text"><%= category.name %></p>
           </div>
           <div class="card-footer text-muted">
@@ -22,4 +27,9 @@
       </div>
     </div>
   <% end %>
+
+  <div class="flickr_pagination mb-4">
+    <%= will_paginate @categories, :container => false %>
+  </div>
+
 </div>
