@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user
   before_action :require_same_user, only: [:edit, :update, :destroy]
   before_action :require_admin, only: [:destroy]
 
@@ -54,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @user and !current_user.admin?
+    if logged_in? and current_user != @user and !current_user.admin?
       flash[:danger] = "You can only edit your own account"
       redirect_to root_path
     end
