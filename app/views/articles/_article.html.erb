@@ -1,8 +1,8 @@
 <div class="container">
-  <% if @articles.length == 0 %>
+  <% if obj.length == 0 %>
     <div class="text-center mb-1"><h5>There is no article created by this user yet.</h5></div>
   <% end %>
-  <% @articles.each do |article| %>
+  <% obj.each do |article| %>
     <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
         <div class="card text-center shadow mb-5 bg-white rounded">
@@ -14,6 +14,9 @@
           <div class="card-body">
             <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
             <p class="card-text"><%= truncate(article.description, length: 100) %></p>
+            <% if article.categories.any? %>
+              <p>Categories: <%= render article.categories %></p>
+            <% end %>
             <%= link_to "View", article_path(article), class: "btn btn-outline-success" %>
             <% if logged_in? && (current_user == article.user || current_user.admin?) %>
               <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %>
