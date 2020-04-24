@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :members
   root "pages#home"
   get 'about', to: "pages#about"
   resources :articles#, only: [:show,:index,:new,:create,:edit,:update]
