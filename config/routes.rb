@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :members
+  devise_for :members, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
   root "pages#home"
   get 'about', to: "pages#about"
   resources :articles#, only: [:show,:index,:new,:create,:edit,:update]
