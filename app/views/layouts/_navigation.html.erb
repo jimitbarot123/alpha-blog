@@ -31,8 +31,10 @@
           <% Category.all.each do |category| %>
             <%= link_to "#{category.name}", category_path(category), class: "dropdown-item" %>
           <% end %>
-          <div class="dropdown-divider"></div>
-          <%= link_to "Create New Category", new_category_path, class: "dropdown-item" %>
+          <% if can? :create, Category %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Create New Category", new_category_path %>
+          <% end %>
         </div>
       </li>
       <% end %>
@@ -42,7 +44,7 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to 'Log in', login_path, class: "nav-link" %>
+          <%= link_to 'Log in', new_member_session_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to 'Sign up', new_member_registration_path, class: "nav-link" %>

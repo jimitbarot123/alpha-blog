@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-
+  load_and_authorize_resource
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   #before_action :require_user#, except: [:index, :show]
   #before_action :require_same_user, only: [:edit, :update, :destroy]
@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user = current_user
+    @article.user = current_member
     if @article.save
       flash[:notice] = "Article was created successfully."
       redirect_to @article #article_patch(@article)
@@ -53,11 +53,11 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :description, category_ids: [])
   end
 
-  def require_same_user
-    if current_user != @article.user and !current_user.admin?
-      flash[:danger] = "You can only edit your own articles"
-      redirect_to root_path
-    end
-  end
+  # def require_same_user
+  #   if current_user != @article.user and !current_user.admin?
+  #     flash[:danger] = "You can only edit your own articles"
+  #     redirect_to root_path
+  #   end
+  # end
 
 end

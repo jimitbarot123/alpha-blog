@@ -18,11 +18,12 @@
               <p>Categories: <%= render article.categories %></p>
             <% end %>
             <%= link_to "View", article_path(article), class: "btn btn-outline-success" %>
-            <% if member_signed_in? && (current_member.username == article.user.username) %>
+            <% if can? :update, article %>
               <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %>
+            <% end %>
+            <% if member_signed_in? && current_member.admin? %>
               <%= link_to "Delete", article_path(article), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
             <% end %>
-
           </div>
           <div class="card-footer text-muted">
             <small>Created <%= time_ago_in_words(article.created_at) %> ago,

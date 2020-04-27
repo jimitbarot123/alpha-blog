@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_member!
   include DeviseWhitelist
 
+  def current_ability
+    @current_ability ||= Ability.new(current_member)
+  end
+
   # helper_method :current_user, :logged_in?
   #
   # def current_user
