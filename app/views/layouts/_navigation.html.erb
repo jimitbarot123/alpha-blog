@@ -42,18 +42,18 @@
       <li class="nav-item">
 
       </li>
-
+      <% if current_user %>
       <li class="nav-item">
         <%= link_to 'Logout', destroy_user_session_path, class: "nav-link", method: :delete %>
       </li>
-
+      <% else %>
       <li class="nav-item">
         <%= link_to 'Log in', new_user_session_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
         <%= link_to 'Sign up', new_user_registration_path, class: "nav-link" %>
       </li>
-
+      <% end %>
     </ul>
     <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
