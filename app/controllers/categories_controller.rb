@@ -1,7 +1,8 @@
 class CategoriesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_category, only: [:show, :edit, :update]
-  before_action :require_user
-  before_action :require_admin, except: [:show, :index]
+  # before_action :require_user
+  # before_action :require_admin, except: [:show, :index]
 
   def index
     @categories = Category.paginate(page: params[:page], per_page: 5)
@@ -46,14 +47,14 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:name)
   end
 
-  def require_admin
-    if logged_in? and !current_user.admin?
-      flash[:danger] = "Only admin can perform that action."
-      redirect_to categories_path
-    elsif !logged_in?
-      flash[:danger] = "Only admin can perform that action."
-      redirect_to root_path
-    end
-  end
+  # def require_admin
+  #   if logged_in? and !current_user.admin?
+  #     flash[:danger] = "Only admin can perform that action."
+  #     redirect_to categories_path
+  #   elsif !logged_in?
+  #     flash[:danger] = "Only admin can perform that action."
+  #     redirect_to root_path
+  #   end
+  # end
 
 end

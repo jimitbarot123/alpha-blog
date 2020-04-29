@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  #load_and_authorize_resource
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -17,10 +19,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
 
-  # def new
-  #   @user = User.new
-  # end
-
   # GET /resource/sign_up
   # def new
   #   super
@@ -32,14 +30,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @user = User.find(params[:format])
+    #super
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    byebug
+    #puts params[:user].inspect
+    @user = User.find(params[:user][:email])
+    puts @user.inspect
+    if @user.update(user_params)
+      flash[:notice] = "Your account information was successfully updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -55,7 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
