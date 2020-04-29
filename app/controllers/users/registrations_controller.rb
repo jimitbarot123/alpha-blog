@@ -4,6 +4,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  # def after_sign_up_path_for(resource)
+  #   redirect_to articles_path
+  # end
+
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
   end
@@ -34,9 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   # def update
-  #   exit
   #   super
-  #   redirect_to users_path
   # end
 
   # DELETE /resource
