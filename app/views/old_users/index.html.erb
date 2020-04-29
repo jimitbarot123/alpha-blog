@@ -20,7 +20,7 @@
             <%= link_to "View profile", user, class: "btn btn-outline-success" %>
             <% if user_signed_in? && current_user == user %>
               <%= link_to "Edit profile", edit_user_registration_path(user), class: "btn btn-outline-info" %>
-              <%= link_to "Delete profile", registration_path(user), class: "btn btn-outline-info", method: :delete, data: { confirm: "Are you sure you want to delete the user and all their articles?" } %>
+              <%= link_to "Delete profile", user_path(user), class: "btn btn-outline-info", method: 'delete', data: { confirm: "Are you sure you want to delete the user and all their articles?" } %>
             <% end %>
           </div>
           <div class="card-footer text-muted">
