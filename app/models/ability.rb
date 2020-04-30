@@ -10,7 +10,7 @@ class Ability
       if user.superadmin_role?
         can :manage, :all
       elsif user.supervisor_role?
-        can :manage, [Article, Category]
+        can :manage, Article
       else
         can :read, :all
       end

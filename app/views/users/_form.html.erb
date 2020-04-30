@@ -24,8 +24,23 @@
           </div>
         </div>
 
+        <div class="form-group row">
+          <%= f.label :password_confirmation, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: "form-control shadow rounded", placeholder: "Retype a password" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :current_password, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.password_field :current_password, autocomplete: 'current-password', class: "form-control shadow rounded", placeholder: "Choose a password" %>
+            <small class="form-text text-muted"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>
+          </div>
+        </div>
+
         <div class="form-group row justify-content-center">
-          <%= f.submit(@user.new_record? ? "Sign up" : "Update account", class: "btn btn-outline-light btn-lg") %>
+          <%= f.submit "Update account", class: "btn btn-outline-light btn-lg" %>
         </div>
       <% end %>
     </div>
