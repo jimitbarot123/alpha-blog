@@ -10,14 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   redirect_to articles_path
   # end
 
-  def index
-    @users = User.paginate(page: params[:page], per_page: 5)
-  end
-
-  def show
-    @user = User.find(params[:format])
-    @articles = @user.articles.paginate(page: params[:page], per_page: 5)
-  end
+  # def index
+  #   @users = User.paginate(page: params[:page], per_page: 5)
+  # end
+  #
+  # def show
+  #   @user = User.find(params[:format])
+  #   @articles = @user.articles.paginate(page: params[:page], per_page: 5)
+  # end
 
   # GET /resource/sign_up
   # def new
@@ -37,10 +37,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    byebug
-    #puts params[:user].inspect
-    @user = User.find(params[:user][:email])
-    puts @user.inspect
+    @user = User.find_by(email: params[:user][:email])
     if @user.update(user_params)
       flash[:notice] = "Your account information was successfully updated"
       redirect_to @user
@@ -51,7 +48,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   # def destroy
-  #   super
+  #   @user = User.find(params[:format])
+  #   @user.destroy
+  #   redirect_to users_path
   # end
 
   # GET /resource/cancel
@@ -64,6 +63,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+
+  def user_params
+    params.require(:user).permit(:id, :username, :email, :password, :password_confirmation)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
