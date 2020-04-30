@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   #before_action :set_user, only: [:show, :edit, :update]
+  load_and_authorize_resource, only: [:destroy]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
@@ -10,19 +11,19 @@ class HomeController < ApplicationController
     @articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
 
-  def edit
-    @user = User.find(params[:format])
-  end
-
-  def update
-    @user = User.find(params[:format])
-    if @user.update(user_params)
-      flash[:notice] = "Your account information was successfully updated"
-      redirect_to @user
-    else
-      render 'edit'
-    end
-  end
+  # def edit
+  #   @user = User.find(params[:format])
+  # end
+  #
+  # def update
+  #   @user = User.find(params[:format])
+  #   if @user.update(user_params)
+  #     flash[:notice] = "Your account information was successfully updated"
+  #     redirect_to @user
+  #   else
+  #     render 'edit'
+  #   end
+  # end
 
   def destroy
     #byebug
