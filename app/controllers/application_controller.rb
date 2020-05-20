@@ -7,4 +7,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: exception.message
   end
 
+  rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
+
+  protected
+
+  def resource_not_found
+  end
+
 end
