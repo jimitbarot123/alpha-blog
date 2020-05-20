@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Creating Articles" do
 
-  let(:dhaval) { User.create!(username: "testuser2", email: "test2@example.com", password: "password")}
+  let(:dhaval) { User.create!(username: "testuser", email: "test@example.com", password: "password")}
 
   feature "User with have admin access" do
     before do
@@ -14,7 +14,7 @@ RSpec.feature "Creating Articles" do
     scenario "A user creates a new article" do
       click_link "Create new article"
 
-      expect(page.current_path).to eq(new_article_path)
+      expect(page).to have_current_path(new_article_path)
       expect(page).to have_content("Create a new article")
 
       fill_in "title", with: "Creating a blog"
