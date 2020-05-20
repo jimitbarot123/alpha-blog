@@ -18,7 +18,7 @@
               <p>Categories: <%= render article.categories %></p>
             <% end %>
             <%= link_to "View", article_path(article), class: "btn btn-outline-success" %>
-            <% if (can? :manage, article) || (current_user == article.user) %>
+            <% if ((can? :manage, article) || (current_user == article.user)) %>
               <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %>
               <%= link_to "Delete", article_path(article), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
             <% end %>
